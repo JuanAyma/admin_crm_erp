@@ -11,7 +11,7 @@ export class DashboardService {
 
   isLoading$: Observable<boolean>;
   isLoadingSubject: BehaviorSubject<boolean>;
-  
+
   constructor(
     private http: HttpClient,
     public authservice: AuthService,
@@ -19,7 +19,7 @@ export class DashboardService {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
   }
-  
+
   configAll(){
     this.isLoadingSubject.next(true);
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
