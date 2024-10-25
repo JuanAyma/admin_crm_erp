@@ -25,7 +25,7 @@ export class CreateProformaComponent {
   phone:string = ''
 
   search_product:string = '';
-  
+
   price:number = 0;
   description_product:string = '';
   quantity_product:number = 0;
@@ -43,7 +43,7 @@ export class CreateProformaComponent {
   agencia:string = '';
   full_name_encargado:string = '';
   documento_encargado:string = '';
-  telefono_encargado:string = '';  
+  telefono_encargado:string = '';
 
 
   REGIONES:any = UBIGEO_REGIONES;
@@ -61,7 +61,7 @@ export class CreateProformaComponent {
   sucursale_deliverie_id:any = '';
   address:string = '';
   date_entrega:any = null;
-  
+
   isLoading$:any;
   client_segments:any = [];
   asesores:any = [];
@@ -89,13 +89,13 @@ export class CreateProformaComponent {
   eval_disponibilidad:boolean = true;
 
   source: any;
-  @ViewChild("discount") something:ElementRef; 
+  @ViewChild("discount") something:ElementRef;
   constructor(
     public modalService: NgbModal,
     public proformaService: ProformasService,
     public toast: ToastrService,
   ) {
-    
+
   }
 
   ngOnInit(): void {
@@ -117,7 +117,7 @@ export class CreateProformaComponent {
 
   initKeyUpDiscount() {
     this.source = fromEvent(this.something.nativeElement, 'keyup');
-    this.source.pipe(debounceTime(1200)).subscribe((c:any) => 
+    this.source.pipe(debounceTime(1200)).subscribe((c:any) =>
        {
         console.log(c);
          this.verifiedDiscount();
@@ -125,7 +125,7 @@ export class CreateProformaComponent {
        }
    );
  }
- 
+
   isLoadingProcess(){
     this.proformaService.isLoadingSubject.next(true);
     setTimeout(() => {
@@ -261,7 +261,7 @@ export class CreateProformaComponent {
 
     // 1.- TENEMOS LA BUSQUEDA POR UNIDAD, SUCURSAL Y SEGMENTO DE CLIENTE
     let WALLETS_FILTER = WALLETS.filter((wallet:any) => wallet.unit && wallet.sucursale && wallet.client_segment);
-    let PRICE_S = WALLETS_FILTER.find((wallet:any) => wallet.unit.id == UNIT_SELECTED && 
+    let PRICE_S = WALLETS_FILTER.find((wallet:any) => wallet.unit.id == UNIT_SELECTED &&
                                               wallet.sucursale.id == this.sucursale_asesor &&
                                             wallet.client_segment.id == this.CLIENT_SELECTED.client_segment.id)
     if(PRICE_S){
@@ -273,11 +273,11 @@ export class CreateProformaComponent {
     }
     // 2.- ES LA BUSQUEDA POR UNIDAD Y POR SUCURSAL O POR SEGMENTO DE CLIENTE
     WALLETS_FILTER = WALLETS.filter((wallet:any) => wallet.unit && wallet.sucursale && !wallet.client_segment);
-    let PRICE_SBA = WALLETS_FILTER.find((wallet:any) => wallet.unit.id == UNIT_SELECTED && 
+    let PRICE_SBA = WALLETS_FILTER.find((wallet:any) => wallet.unit.id == UNIT_SELECTED &&
                                               wallet.sucursale.id == this.sucursale_asesor &&
                                             wallet.client_segment == null);
     WALLETS_FILTER = WALLETS.filter((wallet:any) => wallet.unit && !wallet.sucursale && wallet.client_segment);
-    let PRICE_SBB = WALLETS_FILTER.find((wallet:any) => wallet.unit.id == UNIT_SELECTED && 
+    let PRICE_SBB = WALLETS_FILTER.find((wallet:any) => wallet.unit.id == UNIT_SELECTED &&
                                               wallet.sucursale == null &&
                                             wallet.client_segment.id == this.CLIENT_SELECTED.client_segment.id);
     if(PRICE_SBA && PRICE_SBB){
@@ -306,7 +306,7 @@ export class CreateProformaComponent {
       return;
     }
     // 3.- ES LA BUSQUEDA POR UNIDAD, NADA MAS.
-    let PRICE_ST = WALLETS.find((wallet:any) => wallet.unit.id == UNIT_SELECTED && 
+    let PRICE_ST = WALLETS.find((wallet:any) => wallet.unit.id == UNIT_SELECTED &&
                                               wallet.sucursale == null &&
                                             wallet.client_segment == null);
     if(PRICE_ST){
@@ -315,7 +315,7 @@ export class CreateProformaComponent {
         this.price = 0;
       }
       return;
-    }                                   
+    }
     // ENTONCES SE LE ASIGNARA EL PRECIO BASE DEL PRODUCTO
     this.price = this.PRODUCT_SELECTED.price_general;
     if(this.is_gift == 2){
@@ -368,7 +368,7 @@ export class CreateProformaComponent {
         this.toast.error("Validación","El producto no se puede agregar debido a que no hay exitencias disponibles");
         return;
       }
-    } 
+    }
     if(this.PRODUCT_SELECTED.disponiblidad == 3 && this.eval_disponibilidad){
       this.proformaService.evalDisponibilidad(this.PRODUCT_SELECTED.id,this.unidad_product,this.quantity_product).subscribe((resp:any) => {
         console.log(resp);
@@ -606,7 +606,7 @@ export class CreateProformaComponent {
     formData.append("description",this.description);
 
     formData.append("DETAIL_PROFORMAS",JSON.stringify(this.DETAIL_PROFORMAS));
-    
+
     formData.append("sucursale_deliverie_id",this.sucursale_deliverie_id);
     formData.append("date_entrega",this.date_entrega);
     if(this.address){
@@ -635,27 +635,31 @@ export class CreateProformaComponent {
       formData.append("amount_payment",this.amount_payment+"");
       formData.append("payment_file",this.payment_file);
     }
-    
-    this.proformaService.createProforma(formData).subscribe((resp:any) => {
-      console.log(resp);
-      this.toast.success("Exito","LA proforma se creo con exito");
 
-      this.resetClient();
-      this.DETAIL_PROFORMAS = [];
-      this.resetSucursaleDeliverie();
-      this.TOTAL_PROFORMA = 0;
-      this.method_payment_id = '';
-      this.amount_payment = 0;
-      this.imagen_previzualiza = '';
-      this.payment_file = null;
-      this.TOTAL_IMPUESTO_PROFORMA = 0;
-      this.DEBT_PROFORMA = 0;
-      this.PAID_OUT_PROFORMA = 0;
-      this.banco_id = '';this.description = '';
-      this.isLoadingProcess();
-    },(err:any) => {
-      console.log(err);
-      this.toast.error("Validación","Hubo un error en el servidor, intente nuevamente o acceda a la consola y vea que sucede");
-    })
+    this.proformaService.createProforma(formData).subscribe({
+      next: (resp: any) => {
+        console.log(resp);
+        this.toast.success("Exito", "LA proforma se creo con exito");
+
+        this.resetClient();
+        this.DETAIL_PROFORMAS = [];
+        this.resetSucursaleDeliverie();
+        this.TOTAL_PROFORMA = 0;
+        this.method_payment_id = '';
+        this.amount_payment = 0;
+        this.imagen_previzualiza = '';
+        this.payment_file = null;
+        this.TOTAL_IMPUESTO_PROFORMA = 0;
+        this.DEBT_PROFORMA = 0;
+        this.PAID_OUT_PROFORMA = 0;
+        this.banco_id = '';
+        this.description = '';
+        this.isLoadingProcess();
+      },
+      error: (err: any) => {
+        console.log(err);
+        this.toast.error("Validación", "Hubo un error en el servidor, intente nuevamente o acceda a la consola y vea que sucede");
+      }
+    });
   }
-} 
+}
