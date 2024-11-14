@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, finalize } from 'rxjs';
 import { AuthService } from '../../auth';
 import { URL_SERVICIOS } from 'src/app/config/config';
-
+import { iziPay } from '../../../config/iziConfig';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,7 @@ export class ProformasService {
 
   isLoading$: Observable<boolean>;
   isLoadingSubject: BehaviorSubject<boolean>;
-  
+
   constructor(
     private http: HttpClient,
     public authservice: AuthService,
@@ -53,7 +53,7 @@ export class ProformasService {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
-  
+
   configAll(){
     this.isLoadingSubject.next(true);
     let URL = URL_SERVICIOS+"/proformas/config";
@@ -62,7 +62,7 @@ export class ProformasService {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
-  
+
   listProformas(page:number = 1,data:any = {}){
     this.isLoadingSubject.next(true);
     let URL = URL_SERVICIOS+"/proformas/index";
@@ -84,7 +84,7 @@ export class ProformasService {
   evalDisponibilidad(PRODUCT_ID:string,unit_id:string,quantity:number){
     this.isLoadingSubject.next(true);
     let URL = URL_SERVICIOS+"/proformas/eval-disponibilidad/"+PRODUCT_ID+"?unit_id="+unit_id+"&quantity="+quantity;
-    
+
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
     return this.http.get(URL,{headers:headers}).pipe(
       finalize(() => this.isLoadingSubject.next(false))
@@ -93,6 +93,15 @@ export class ProformasService {
 
   createProforma(data:any){
     this.isLoadingSubject.next(true);
+    // try {
+    //
+    //   const checkout = new Izipay({ config: iziPay });
+    //
+    // } catch ({Errors, message, date}) {
+    //
+    //   console.log({Errors, message, date});
+    //
+    // }
     let URL = URL_SERVICIOS+"/proformas";
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
     return this.http.post(URL,data,{headers:headers}).pipe(
