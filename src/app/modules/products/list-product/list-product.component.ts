@@ -39,7 +39,7 @@ export class ListProductComponent {
     public modalService: NgbModal,
     public productService: ProductsService
   ) {
-    
+
   }
 
   ngOnInit(): void {
@@ -116,13 +116,13 @@ export class ListProductComponent {
     let TEXTO = "";
     switch (val) {
       case 1:
-        TEXTO = "Tax Free"
+        TEXTO = "Libre de impuestos"
         break;
         case 2:
-          TEXTO = "Taxable Goods"
+          TEXTO = "Bienes sujetos a impuestos"
           break;
           case 3:
-        TEXTO = "Downloadable Product"
+        TEXTO = "Producto descargable"
         break;
       default:
         break;

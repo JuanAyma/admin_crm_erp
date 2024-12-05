@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, finalize } from 'rxjs';
 import { AuthService } from '../../auth';
 import { URL_SERVICIOS } from 'src/app/config/config';
-import { iziPay } from '../../../config/iziConfig';
+// import { iziPay } from '../../../config/iziConfig';
 @Injectable({
   providedIn: 'root'
 })

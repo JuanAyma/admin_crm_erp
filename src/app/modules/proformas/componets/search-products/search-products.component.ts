@@ -14,7 +14,7 @@ export class SearchProductsComponent {
   constructor(
     public modal: NgbActiveModal
   ) {
-    
+
   }
 
   getDisponibilidad(val:number){
@@ -38,20 +38,20 @@ export class SearchProductsComponent {
     let TEXTO = "";
     switch (val) {
       case 1:
-        TEXTO = "Tax Free"
+        TEXTO = "Libre de impuestos"
         break;
         case 2:
-          TEXTO = "Taxable Goods"
+          TEXTO = "Bienes sujetos a impuestos"
           break;
           case 3:
-        TEXTO = "Downloadable Product"
+        TEXTO = "Producto descargable"
         break;
       default:
         break;
     }
     return TEXTO;
   }
-  
+
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
