@@ -4,7 +4,7 @@
     <div class="modal-header" id="kt_modal_add_user_header">
         <!--begin::Modal title-->
         <h2 class="fw-bolder">Add Conversión</h2>
-        
+
         <!--end::Modal title-->
         <!--begin::Close-->
         <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close" (click)="modal.dismiss()">
@@ -33,7 +33,7 @@
                         <div class="d-flex align-items-center position-relative my-1">
                             <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5"><span class="path1"></span><span
                                     class="path2"></span></i> <input type="text" [(ngModel)]="search_product" (keyup.enter)="listProducts()" name="search" data-kt-customer-table-filter="search"
-                                class="form-control form-control-solid ps-12" placeholder="Search Products">
+                                class="form-control form-control-solid ps-12" placeholder="Buscar Productos">
                         </div>
                     </div>
                     <div class="col-5">
@@ -45,10 +45,10 @@
                             placeholder="Selec. Unidad"
                             (change)="selectedWarehouse()"
                         >
-                            <option value="">Ninguno</option>   
+                            <option value="">Ninguno</option>
                             <ng-container *ngFor="let warehouse of warehouses">
-                                <option [value]="warehouse.id">{{ warehouse.name }}</option>  
-                            </ng-container> 
+                                <option [value]="warehouse.id">{{ warehouse.name }}</option>
+                            </ng-container>
                         </select>
                     </div>
                     <div class="col-9 my-4">
@@ -62,21 +62,21 @@
                                   </tr>
                                </thead>
                                <tbody>
-                                  <tr class="row-table" style="border-bottom: 0.1rem solid !important;" 
+                                  <tr class="row-table" style="border-bottom: 0.1rem solid !important;"
                                     *ngFor="let WAREHOUSE_UNIT of WAREHOUSE_UNITS">
                                     <td class="text-gray-900 fw-bold text-hover-primary fs-6">
-                                        {{ WAREHOUSE_UNIT.unit.name }}                
+                                        {{ WAREHOUSE_UNIT.unit.name }}
                                      </td>
 
                                      <td class="text-gray-900 fw-bold text-hover-primary fs-6">
-                                        {{ WAREHOUSE_UNIT.quantity }}                     
+                                        {{ WAREHOUSE_UNIT.quantity }}
                                      </td>
-                                    
+
                                      <td class="">
                                         <button class="btn btn-primary btn-sm" (click)="selectedUnit(WAREHOUSE_UNIT)">+</button>
                                      </td>
                                   </tr>
-                         
+
                                </tbody>
                             </table>
                         </div>
@@ -95,10 +95,10 @@
                             [(ngModel)]="unit_end_id"
                             placeholder="Selec. Unidad"
                         >
-                            <option value="">Ninguno</option>   
+                            <option value="">Ninguno</option>
                             <ng-container *ngFor="let unit_transform of unit_transforms">
-                                <option [value]="unit_transform.id">{{ unit_transform.name }}</option>  
-                            </ng-container> 
+                                <option [value]="unit_transform.id">{{ unit_transform.name }}</option>
+                            </ng-container>
                         </select>
                     </div>
                     <div class="col-3">

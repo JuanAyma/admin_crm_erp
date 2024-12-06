@@ -9,7 +9,7 @@
                     <div class="d-flex align-items-center position-relative my-1">
                         <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5"><span class="path1"></span><span
                                 class="path2"></span></i> <input type="text" [(ngModel)]="search" (keyup.enter)="listProducts()" name="search" data-kt-customer-table-filter="search"
-                            class="form-control form-control-solid w-250px ps-12" placeholder="Search Products">
+                            class="form-control form-control-solid w-250px ps-12" placeholder="Buscar Productos">
                     </div>
                 </div>
                 <div class="col-3">
@@ -44,13 +44,13 @@
                 </div>
                 <div class="col-1 d-flex">
                     <button class="btn btn-primary btn-sm mx-1" (click)="listProducts()">
-                        <i class="ki-duotone ki-magnifier fs-2"><span class="path1"></span><span class="path2"></span></i> 
+                        <i class="ki-duotone ki-magnifier fs-2"><span class="path1"></span><span class="path2"></span></i>
                     </button>
                     <button class="btn btn-dark btn-sm"  (click)="resetlistProducts()">
-                        <i class="ki-duotone ki-loading fs-2"><span class="path1"></span><span class="path2"></span></i> 
+                        <i class="ki-duotone ki-loading fs-2"><span class="path1"></span><span class="path2"></span></i>
                     </button>
                 </div>
-                
+
             </div>
             <!--end::Search-->
         </div>
@@ -62,7 +62,7 @@
             <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                 <!--begin::Add customer-->
                 <button type="button" class="btn btn-primary" *ngIf="isPermission('register_product')" routerLink="/productos/registro">
-                    + Add Product
+                    + Añadir Producto
                 </button>
                 <!--end::Add customer-->
             </div>
@@ -139,11 +139,11 @@
             </div>
             <div class="col-2">
                 <button class="btn btn-success btn-sm" (click)="downloadProducts()">
-                    <i class="ki-duotone ki-folder-down fs-2"><span class="path1"></span><span class="path2"></span></i> 
+                    <i class="ki-duotone ki-folder-down fs-2"><span class="path1"></span><span class="path2"></span></i>
                 </button>
 
                 <button class="btn btn-success btn-sm mx-1" (click)="importProducts()">
-                    <i class="ki-duotone ki-update-folder fs-2"><span class="path1"></span><span class="path2"></span></i> 
+                    <i class="ki-duotone ki-update-folder fs-2"><span class="path1"></span><span class="path2"></span></i>
                 </button>
 
                 <button *ngIf="num_products_agotado > 0" class="btn btn-danger btn-sm mx-1" (click)="selectAgotado()">
@@ -162,7 +162,7 @@
                     style="width: 1199.5px;">
                     <thead>
                         <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0" role="row">
-                            
+
                             <th class="min-w-125px dt-orderable-asc dt-orderable-desc" data-dt-column="1" rowspan="1"
                                 colspan="1" aria-label="Customer Name: Activate to sort" tabindex="0"><span
                                     class="dt-column-title" role="button">Producto</span><span
@@ -211,7 +211,7 @@
                                         <div class="symbol symbol-50px me-5">
                                             <img [src]="PRODUCT.imagen" class="" alt="">
                                         </div>
-                                        
+
                                         <div class="d-flex justify-content-start flex-column">
                                             <a href="#" class="text-gray-900 fw-bold text-hover-primary mb-1 fs-6">{{ PRODUCT.title }}</a>
                                             <span class="text-muted fw-semibold text-muted d-block fs-7">Peso: {{ PRODUCT.weight }}</span>
@@ -227,11 +227,11 @@
                                 <td>
                                     {{ PRODUCT.product_categorie.name }}
                                 </td>
-                                
+
                                 <td>
                                     {{ PRODUCT.price_general }}
                                 </td>
-    
+
                                 <td >
                                     {{ getDisponibilidad(PRODUCT.disponiblidad) }} </td>
 
@@ -241,25 +241,25 @@
                                 <td >
                                     {{ getTaxSelected(PRODUCT.tax_selected) }} </td>
 
-                                
+
                                     <td>
                                         <span class="badge badge-light-success" *ngIf="PRODUCT.state == 1">Activo</span>
                                     <span class="badge badge-light-danger" *ngIf="PRODUCT.state == 2">Inactivo</span>
-                                        
+
                                     </td>
                                 <td class="">
                                     <a *ngIf="isPermission('edit_product')" [routerLink]="'/productos/list/editar/'+PRODUCT.id" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                        <i class="ki-duotone ki-pencil fs-2"><span class="path1"></span><span class="path2"></span></i> 
+                                        <i class="ki-duotone ki-pencil fs-2"><span class="path1"></span><span class="path2"></span></i>
                                     </a>
-    
+
                                     <a *ngIf="isPermission('delete_product')" href="#" onclick="return false;" (click)="deleteProduct(PRODUCT)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                         <i class="ki-duotone ki-trash fs-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
                                     </a>
                                 </td>
                             </tr>
                         </ng-container>
-                        
-                        
+
+
                     </tbody>
                     <tfoot></tfoot>
                 </table>
